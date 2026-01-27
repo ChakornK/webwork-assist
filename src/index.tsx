@@ -2,7 +2,9 @@ import { render } from "preact";
 import App from "./ui/App";
 
 // @ts-ignore
-import styles from "./ui/index.css" with { type: "css" };
+import appStyles from "./ui/app.css" with { type: "css" };
+// @ts-ignore
+import globalStyles from "./ui/global.css" with { type: "css" };
 
 const observer = new MutationObserver(() => {
   const injectionTarget = document.querySelector(".sticky-nav");
@@ -16,9 +18,13 @@ const observer = new MutationObserver(() => {
   injectionTarget.appendChild(root);
   const shadowRoot = root.attachShadow({ mode: "closed" });
 
-  const stylesheet = new CSSStyleSheet();
-  stylesheet.replaceSync(styles);
-  shadowRoot.adoptedStyleSheets = [stylesheet];
+  const appStyleSheet = new CSSStyleSheet();
+  appStyleSheet.replaceSync(appStyles);
+  shadowRoot.adoptedStyleSheets = [appStyleSheet];
+
+  const globalStyleSheet = new CSSStyleSheet();
+  globalStyleSheet.replaceSync(globalStyles);
+  document.adoptedStyleSheets.push(globalStyleSheet);
 
   render(<App />, shadowRoot);
 });
