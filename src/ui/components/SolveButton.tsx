@@ -26,7 +26,6 @@ export default function SolveButton() {
             setMsg("");
             setDisabled(false);
           },
-          preview: true,
         });
       }}
     >
