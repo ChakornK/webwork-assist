@@ -15,14 +15,15 @@ export default function App() {
 }
 
 function UiButtons() {
-  const [open, setOpen] = useState(true);
+  const [settingsOpen, setSettingsOpen] = useState(false);
+
   return (
     <Fragment>
       <div class={"flex gap-1"}>
         <SolveButton />
-        <SettingsButton onClick={() => setOpen(true)} />
+        <SettingsButton onClick={() => setSettingsOpen(true)} />
       </div>
-      <SettingsModal open={open} onClose={() => setOpen(false)} />
+      <SettingsModal open={settingsOpen} onClose={() => setSettingsOpen(false)} />
     </Fragment>
   );
 }

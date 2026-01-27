@@ -1,4 +1,10 @@
+import { useState } from "preact/hooks";
+import { useStorage } from "src/hooks/useStorage";
+
 export default function SettingsModal({ open, onClose }: { open: boolean; onClose: () => void }) {
+  const [geminiApiKey, setGeminiApiKey] = useStorage("geminiApiKey", "", false);
+  const [tempGeminiApiKey, setTempGeminiApiKey] = useState(geminiApiKey);
+
   return (
     <div class={"fixed inset-0"} style={{ display: open ? "block" : "none" }}>
       <div class={"absolute inset-0 bg-black/50"} onClick={onClose}></div>
@@ -7,13 +13,31 @@ export default function SettingsModal({ open, onClose }: { open: boolean; onClos
           <h1 class={"text-2xl font-semibold"}>WebWork Assist Settings</h1>
 
           <p class={"mt-2"}>Gemini API key</p>
-          <input type="text" class={"inp-text"} placeholder={"AIzaXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"} />
+          <input
+            type="text"
+            class={"inp-text"}
+            placeholder={"AIzaXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"}
+            value={tempGeminiApiKey}
+            onInput={(e) => setTempGeminiApiKey(e.currentTarget.value)}
+          />
 
           <div class={"mt-2 flex justify-end gap-1"}>
-            <button class={"btn"} onClick={onClose}>
+            <button
+              class={"btn"}
+              onClick={() => {
+                onClose();
+                setTempGeminiApiKey(geminiApiKey);
+              }}
+            >
               Cancel
             </button>
-            <button class={"btn"} onClick={onClose}>
+            <button
+              class={"btn"}
+              onClick={() => {
+                onClose();
+                setGeminiApiKey(tempGeminiApiKey);
+              }}
+            >
               Save
             </button>
           </div>

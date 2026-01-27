@@ -1,9 +1,12 @@
 import { useState } from "preact/hooks";
 import { solve } from "../../lib/solver";
+import { useStorage } from "src/hooks/useStorage";
 
 export default function SolveButton() {
   const [msg, setMsg] = useState("");
   const [disabled, setDisabled] = useState(false);
+
+  const [geminiApiKey] = useStorage("geminiApiKey", "", false);
 
   return (
     <button
@@ -12,7 +15,7 @@ export default function SolveButton() {
       onClick={() => {
         setDisabled(true);
         solve({
-          geminiApiKey: "",
+          geminiApiKey,
           onProgressUpdate: (status) => {
             setMsg(status);
           },
