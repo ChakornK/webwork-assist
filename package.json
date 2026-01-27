@@ -4,7 +4,7 @@
   "description": "iykyk",
   "license": "MIT",
   "scripts": {
-    "dev": "concurrently 'lite-server' 'rolldown -w -c' --names 'server,build'",
+    "dev": "concurrently 'lite-server' 'rolldown -w -c' --names 'server,build' --restart-tries -1 --restart-after 3000",
     "build": "rolldown -c",
     "format": "prettier --write ./src"
   },
