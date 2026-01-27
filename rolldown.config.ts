@@ -23,6 +23,9 @@ const userScriptMetadata = `// ==UserScript==
 // @version     1.0
 // @author      -
 // @description Build ${gitHash} - ${new Date().toLocaleString("en")}
+// @grant GM_setValue
+// @grant GM_getValue
+// @grant GM_addValueChangeListener
 // ==/UserScript==`;
 
 export default defineConfig({
