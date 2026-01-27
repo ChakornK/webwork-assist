@@ -14,19 +14,26 @@ export default function SolveButton() {
       disabled={disabled}
       onClick={() => {
         setDisabled(true);
-        solve({
-          geminiApiKey,
-          onProgressUpdate: (status) => {
-            setMsg(status);
-          },
-          onFinish: (success, message) => {
-            if (!success) {
-              alert(`Something went wrong: ${message}\nCheck the console for more info`);
-            }
-            setMsg("");
-            setDisabled(false);
-          },
-        });
+        try {
+          solve({
+            geminiApiKey,
+            onProgressUpdate: (status) => {
+              setMsg(status);
+            },
+            onFinish: (success, message) => {
+              if (!success) {
+                alert(`Something went wrong: ${message}\nCheck the console for more info`);
+              }
+              setMsg("");
+              setDisabled(false);
+            },
+          });
+        } catch (e) {
+          alert(`Something went wrong: ${e}\nCheck the console for more info`);
+        } finally {
+          setMsg("");
+          setDisabled(false);
+        }
       }}
     >
       {msg || "WebWork Assist"}
