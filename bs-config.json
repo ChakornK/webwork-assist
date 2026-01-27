@@ -8,6 +8,9 @@
     }
   },
   "startPath": "/webwork-assist.user.js",
-  "no-ui": "1",
+  "open": false,
+  "ui": {
+    "enabled": false
+  },
   "logLevel": "info"
 }
