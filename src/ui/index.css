@@ -1,0 +1,29 @@
+@layer theme, base, components, utilities;
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/preflight.css" layer(base);
+@import "tailwindcss/utilities.css" layer(utilities);
+
+@theme {
+  --bs-primary: #038;
+  --bs-text: #fff;
+
+  --color-btn-color: var(--bs-text);
+  --color-btn-bg: var(--bs-primary);
+  --color-btn-border-color: var(--bs-primary);
+  --color-btn-hover-color: var(--bs-text);
+  --color-btn-hover-bg: #002b74;
+  --color-btn-hover-border-color: #00296d;
+  --color-btn-active-color: var(--bs-text);
+  --color-btn-active-bg: #00296d;
+  --color-btn-active-border-color: #002666;
+  --color-btn-disabled-color: var(--bs-text);
+  --color-btn-disabled-bg: var(--bs-primary);
+  --color-btn-disabled-border-color: var(--bs-primary);
+}
+
+.btn {
+  @apply text-btn-color bg-btn-bg border-btn-border-color rounded-md border px-3 py-1.5 cursor-pointer transition-colors;
+  @apply hover:bg-btn-hover-bg hover:border-btn-hover-border-color;
+  @apply active:bg-btn-active-bg active:border-btn-active-border-color;
+  @apply disabled:bg-btn-disabled-bg disabled:border-btn-disabled-border-color;
+}
