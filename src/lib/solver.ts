@@ -36,7 +36,7 @@ export async function solve({
   preview?: boolean;
 }) {
   if (!geminiApiKey) {
-    onFinish(false, "Missing API key!");
+    return onFinish(false, "Missing API key!");
   }
 
   onProgressUpdate("Parsing problem...");
