@@ -5,11 +5,20 @@ export default function SettingsModal({ open, onClose }: { open: boolean; onClos
   const [geminiApiKey, setGeminiApiKey] = useStorage("geminiApiKey", "", false);
   const [tempGeminiApiKey, setTempGeminiApiKey] = useState(geminiApiKey);
 
+  const onCancel = () => {
+    onClose();
+    setTempGeminiApiKey(geminiApiKey);
+  };
+
   return (
     <div class={"fixed inset-0"} style={{ display: open ? "block" : "none" }}>
-      <div class={"absolute inset-0 bg-black/50"} onClick={onClose}></div>
-      <div class={"absolute inset-0 flex items-center justify-center p-8"}>
-        <div class={"flex w-full max-w-md flex-col items-stretch gap-2 rounded-md bg-white p-4 shadow-md"}>
+      <div class={"absolute inset-0 bg-black/50"} onClick={onCancel}></div>
+      <div class={"pointer-events-none absolute inset-0 flex items-center justify-center p-8"}>
+        <div
+          class={
+            "pointer-events-auto flex w-full max-w-md flex-col items-stretch gap-2 rounded-md bg-white p-4 shadow-md"
+          }
+        >
           <h1 class={"text-2xl font-semibold"}>WebWork Assist Settings</h1>
 
           <p class={"mt-2"}>Gemini API key</p>
@@ -22,13 +31,7 @@ export default function SettingsModal({ open, onClose }: { open: boolean; onClos
           />
 
           <div class={"mt-2 flex justify-end gap-1"}>
-            <button
-              class={"btn"}
-              onClick={() => {
-                onClose();
-                setTempGeminiApiKey(geminiApiKey);
-              }}
-            >
+            <button class={"btn"} onClick={onCancel}>
               Cancel
             </button>
             <button
