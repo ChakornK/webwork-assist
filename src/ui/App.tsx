@@ -1,7 +1,13 @@
+import { Fragment } from "preact";
+import { Unpoison } from "../lib/unpoison";
+
 export default function App() {
   return (
-    <div>
-      <button class={"btn"}>WebWork Assist</button>
-    </div>
+    <Fragment>
+      <Unpoison />
+      <div>
+        <button class={"btn"}>WebWork Assist</button>
+      </div>
+    </Fragment>
   );
 }
