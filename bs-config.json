@@ -1,0 +1,13 @@
+{
+  "port": 6741,
+  "files": ["./dist/*.{js}"],
+  "server": {
+    "baseDir": "./dist",
+    "middleware": {
+      "0": ""
+    }
+  },
+  "startPath": "/webwork-assist.user.js",
+  "no-ui": "1",
+  "logLevel": "info"
+}
