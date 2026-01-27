@@ -494,6 +494,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@violentmonkey/types@npm:^0.3.2":
+  version: 0.3.2
+  resolution: "@violentmonkey/types@npm:0.3.2"
+  dependencies:
+    user-agent-data-types: "npm:^0.4.2"
+  checksum: 10c0/30e15c068ce3a039020cdc9de1520efecebc681662100d157e999540d53a98f67c60335c7a8cb3b53205c55ef300f68d9b41d85d922e81189a9950b513cc8474
+  languageName: node
+  linkType: hard
+
 "abbrev@npm:^4.0.0":
   version: 4.0.0
   resolution: "abbrev@npm:4.0.0"
@@ -2707,6 +2716,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"user-agent-data-types@npm:^0.4.2":
+  version: 0.4.2
+  resolution: "user-agent-data-types@npm:0.4.2"
+  checksum: 10c0/acb84ede08a6e7fc08c0d32a76992f36e630e1b88b0088425566e78f0c0b2ce790c1b851c0ca9c326a1a6d041220bcab8d592bbfb39ceb50efcaa5d06044e6ba
+  languageName: node
+  linkType: hard
+
 "utils-merge@npm:1.0.1":
   version: 1.0.1
   resolution: "utils-merge@npm:1.0.1"
@@ -2734,6 +2750,7 @@ __metadata:
   dependencies:
     "@tailwindcss/postcss": "npm:^4.1.18"
     "@types/node": "npm:^25.0.10"
+    "@violentmonkey/types": "npm:^0.3.2"
     concurrently: "npm:^9.2.1"
     lightningcss: "npm:^1.31.1"
     lite-server: "npm:^2.6.1"
