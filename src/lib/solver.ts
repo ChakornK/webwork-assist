@@ -120,6 +120,11 @@ export async function solve({
     }),
   }).then((r) => r.json());
   console.log("Raw response:", res);
+
+  if (res.error) {
+    return onFinish(false, res.error.message);
+  }
+
   const solutions = JSON.parse(res.candidates[0].content.parts[0].text.match(jsonResRegex)[0]);
   console.log("Solutions:", solutions);
 
