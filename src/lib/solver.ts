@@ -9,6 +9,7 @@ const jsonResRegex = /{.*}/is;
 const problemBodyRegex = /<div id="output_problem_body".*?>(?<problem>.*)<input id="num_attempts"/is;
 const notesRegex = /notes?:.*/i;
 const equationContentRegex = /<script.*?>(?<eq>.*?)<\/script>/gi;
+const equationImageRegex = /<img[^>]+?src="[^"]+?equations[^>]+?alt="(?<eq>.*?)"/gi;
 const inputFieldRegex = /<input.*?id="(.*?)".*?type="?text"?.*?<input.*?>/gi;
 const inputFieldRegex2 = /<input.*?type="?text"?.*?id="(.*?)".*?<input.*?>/gi;
 const linebreakRegex = /<br>/gi;
@@ -62,6 +63,7 @@ export async function solve({
 
   // sanitize equations
   problemBody = problemBody.replaceAll(equationContentRegex, (_, c) => c);
+  problemBody = problemBody.replaceAll(equationImageRegex, (_, c) => c);
 
   // format input fields
   // make field id lowercase to avoid letter casing hallucinations
@@ -91,6 +93,7 @@ export async function solve({
   );
 
   problemBody = problemBody.replaceAll(linebreakRegex, "\n");
+  problemBody = problemBody.replaceAll("&#92;", "\\");
 
   console.log("Problem body: ", problemBody);
 
