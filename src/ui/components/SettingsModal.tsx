@@ -21,7 +21,13 @@ export default function SettingsModal({ open, onClose }: { open: boolean; onClos
         >
           <h1 class={"text-2xl font-semibold"}>WebWork Assist Settings</h1>
 
-          <p class={"mt-2"}>Gemini API key</p>
+          <a class={"mt-2"}>
+            Gemini API key (
+            <a class={"link cursor-help"} href={"https://aistudio.google.com/app/api-keys"} target={"_blank"}>
+              ?
+            </a>
+            )
+          </a>
           <input
             type="text"
             class={"inp-text"}
