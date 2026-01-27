@@ -8,6 +8,8 @@ iykyk :)
 
 Make sure you have [Violentmonkey](https://violentmonkey.net/) installed on your browser.
 
+You will also need to get a [Gemini API key](https://aistudio.google.com/app/api-keys).
+
 ## Development
 
 Install Violentmonkey in your browser
