@@ -22,6 +22,8 @@ const radioOptionRegex = /<label><input.*?type="radio".*?value="(.*?)".*?>(.*?)<
 
 const wrappingElRemovalRegex = /<(div|b|i|ul|ol|p|span)( [^<]+?)?>(.*?)<\/\1>/gs;
 
+const imgRemovalRegex = /<img.+?>/gi;
+
 export async function solve({
   geminiApiKey,
   onProgressUpdate,
@@ -97,6 +99,25 @@ export async function solve({
 
   console.log("Problem body: ", problemBody);
 
+  onProgressUpdate("Processing images...");
+  problemBody = problemBody.replaceAll(imgRemovalRegex, "");
+  const imgUrls = [...document.querySelectorAll(".image-view-elt")].map((e) => e.getAttribute("src"));
+  const imgPromises = imgUrls.map((url) =>
+    fetch(url)
+      .then((r) => r.blob())
+      .then(
+        (b) =>
+          new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.onloadend = () => resolve(reader.result);
+            reader.onerror = reject;
+            reader.readAsDataURL(b);
+          }),
+      ),
+  );
+  const imgB64s = (await Promise.all(imgPromises)).filter((e) => typeof e === "string");
+  console.log("Images: ", imgB64s);
+
   if (preview) {
     console.log("Preview only. Not prompting Gemini.");
     return onFinish(true, "");
@@ -114,6 +135,12 @@ export async function solve({
       contents: [
         {
           parts: [
+            ...imgB64s.map((b64) => ({
+              inline_data: {
+                mime_type: b64.split(";")[0].split(":")[1],
+                data: b64.split(",")[1],
+              },
+            })),
             {
               text: `${geminiPrompt}${problemBody}`,
             },
