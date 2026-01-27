@@ -6,7 +6,7 @@ iykyk :)
 
 [![Install](https://img.shields.io/github/downloads/chakornk/webwork-assist/total?style=for-the-badge&label=%E2%AD%B3%20Install&labelColor=003388&color=002b74&cacheSeconds=67)](https://github.com/chakornk/webwork-assist/releases/latest/download/webwork-assist.user.js)
 
-Make sure you have [Violentmonkey](https://violentmonkey.net/) installed on your browser.
+Make sure you have [Violentmonkey](https://violentmonkey.github.io) installed on your browser.
 
 You will also need to get a [Gemini API key](https://aistudio.google.com/app/api-keys).
 
