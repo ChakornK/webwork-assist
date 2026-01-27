@@ -22,6 +22,7 @@ const userScriptMetadata = `// ==UserScript==
 // @version     ${process.env.VERSION || "1.0.0"}
 // @author      -
 // @description Build ${gitHash} - ${new Date().toLocaleString("en")}
+// @homepageURL https://github.com/chakornk/webwork-assist
 // @downloadURL https://github.com/chakornk/webwork-assist/releases/latest/download/webwork-assist.user.js
 // @updateURL   https://github.com/chakornk/webwork-assist/releases/latest/download/webwork-assist.user.js
 // @grant       GM_setValue
