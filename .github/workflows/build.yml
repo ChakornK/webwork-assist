@@ -1,0 +1,38 @@
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Get commit hash
+        id: hash
+        uses: prompt/actions-commit-hash@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 24
+
+      - name: Install dependencies
+        run: |
+          corepack enable
+          yarn
+
+      - name: Build
+        run: |
+          yarn build
+
+      - name: Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: "${{ steps.hash.outputs.short }}"
+          files: dist/webwork-assist.user.js
