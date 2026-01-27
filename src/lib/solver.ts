@@ -23,16 +23,23 @@ const wrappingElRemovalRegex = /<(div|b|i|ul|ol|p|span)( [^<]+?)?>(.*?)<\/\1>/gs
 
 export async function solve({
   geminiApiKey,
+  onProgressUpdate,
+  onFinish,
   autosubmit,
   preview,
 }: {
   geminiApiKey: string;
+  onProgressUpdate: (status: string) => void;
+  onFinish: (success: boolean, message: string) => void;
   autosubmit?: boolean;
   preview?: boolean;
 }) {
   if (!geminiApiKey) {
-    alert("Please provide an API key.");
+    onFinish(false, "Missing API key!");
   }
+
+  onProgressUpdate("Parsing problem...");
+
   const doc = await (await fetch(location.href)).text();
 
   // extract problem content
@@ -89,11 +96,11 @@ export async function solve({
 
   if (preview) {
     console.log("Preview only. Not prompting Gemini.");
-    return;
+    return onFinish(true, "");
   }
 
   // ask gemini
-  console.log("Waiting for response...");
+  onProgressUpdate("Waiting for Gemini...");
   const res = await fetch(geminiUrl, {
     method: "POST",
     headers: {
@@ -117,7 +124,7 @@ export async function solve({
   console.log("Solutions:", solutions);
 
   // fill answers
-  console.log("Filling answers...");
+  onProgressUpdate("Filling answers...");
   for (const [key, value] of Object.entries(solutions) as [string, string][]) {
     const targetId = key.replace("answer", "AnSwEr");
     const el = document.getElementById(targetId) as HTMLInputElement;
@@ -137,7 +144,9 @@ export async function solve({
   }
 
   // submit
-  if (!autosubmit) return;
-  console.log("Submitting...");
-  document.getElementById("submitAnswers_id").click();
+  if (autosubmit) {
+    onProgressUpdate("Submitting answers...");
+    document.getElementById("submitAnswers_id").click();
+  }
+  onFinish(true, "");
 }

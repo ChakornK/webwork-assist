@@ -25,5 +25,5 @@
   @apply text-btn-color bg-btn-bg border-btn-border-color rounded-md border px-3 py-1.5 cursor-pointer transition-colors;
   @apply hover:bg-btn-hover-bg hover:border-btn-hover-border-color;
   @apply active:bg-btn-active-bg active:border-btn-active-border-color;
-  @apply disabled:bg-btn-disabled-bg disabled:border-btn-disabled-border-color;
+  @apply disabled:bg-btn-disabled-bg disabled:border-btn-disabled-border-color disabled:opacity-50 disabled:cursor-default;
 }
