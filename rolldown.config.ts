@@ -19,13 +19,14 @@ const userScriptMetadata = `// ==UserScript==
 // @name        WebWork Assist
 // @namespace   Violentmonkey Scripts
 // @match       https://webwork.*/webwork2/*
-// @grant       none
-// @version     1.0
+// @version     ${process.env.VERSION || "1.0.0"}
 // @author      -
 // @description Build ${gitHash} - ${new Date().toLocaleString("en")}
-// @grant GM_setValue
-// @grant GM_getValue
-// @grant GM_addValueChangeListener
+// @downloadURL https://github.com/chakornk/webwork-assist/releases/latest/download/webwork-assist.user.js
+// @updateURL   https://github.com/chakornk/webwork-assist/releases/latest/download/webwork-assist.user.js
+// @grant       GM_setValue
+// @grant       GM_getValue
+// @grant       GM_addValueChangeListener
 // ==/UserScript==`;
 
 export default defineConfig({

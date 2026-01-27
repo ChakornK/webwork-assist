@@ -18,6 +18,9 @@ jobs:
         id: hash
         uses: prompt/actions-commit-hash@v3
 
+      - name: Get commit count
+        run: echo "VERSION=$(git rev-list --count HEAD)" >> $GITHUB_ENV
+
       - name: Setup Node.js
         uses: actions/setup-node@v2
         with:
