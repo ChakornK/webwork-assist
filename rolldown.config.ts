@@ -63,7 +63,7 @@ export default defineConfig({
         });
         const cleaned = minified
           .toString()
-          .replaceAll(/\/\*!.*?\//g, "")
+          .replaceAll(/\/\*!.*?\*\//g, "")
           .trim();
         return cleaned;
       },
