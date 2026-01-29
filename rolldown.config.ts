@@ -67,7 +67,7 @@ export default defineConfig({
           .toString()
           .replaceAll(/\/\*!.*?\*\//g, "")
           .trim();
-        writeFileSync(`${process.cwd()}/dist/debug/${id.split(/\/|\\/).pop()}`, cleaned);
+        writeFileSync(`${process.cwd()}/dist/${id.split(/\/|\\/).pop()}`, cleaned);
         return cleaned;
       },
     },
