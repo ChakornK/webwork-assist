@@ -1,4 +1,4 @@
-@unocss;
+@unocss !preflights;
 
 h1 {
   margin-block: 0;
