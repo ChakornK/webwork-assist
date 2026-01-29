@@ -1,5 +1,5 @@
 import { execSync } from "node:child_process";
-import { writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, writeFileSync } from "node:fs";
 
 import { defineConfig } from "rolldown";
 
@@ -67,7 +67,12 @@ export default defineConfig({
           .toString()
           .replaceAll(/\/\*!.*?\*\//g, "")
           .trim();
-        writeFileSync(`${process.cwd()}/dist/${id.split(/\/|\\/).pop()}`, cleaned);
+
+        if (!existsSync(`${process.cwd()}/dist/debug`)) {
+          mkdirSync(`${process.cwd()}/dist/debug`);
+        }
+        writeFileSync(`${process.cwd()}/dist/debug/${id.split(/\/|\\/).pop()}`, cleaned);
+
         return cleaned;
       },
     },
