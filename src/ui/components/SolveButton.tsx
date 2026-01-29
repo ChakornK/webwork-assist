@@ -13,6 +13,7 @@ export default function SolveButton() {
       class={"btn"}
       disabled={disabled}
       onClick={() => {
+        if (disabled) return;
         setDisabled(true);
         try {
           solve({
@@ -30,7 +31,6 @@ export default function SolveButton() {
           });
         } catch (e) {
           alert(`Something went wrong: ${e}\nCheck the console for more info`);
-        } finally {
           setMsg("");
           setDisabled(false);
         }
