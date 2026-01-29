@@ -1,37 +1,11 @@
-@layer theme, base, components, utilities;
-@import "tailwindcss/theme.css" layer(theme);
-@import "tailwindcss/preflight.css" layer(base);
-@import "tailwindcss/utilities.css" layer(utilities);
+@unocss;
 
-@theme {
-  --bs-primary: #038;
-  --bs-text: #fff;
-
-  --color-btn-color: var(--bs-text);
-  --color-btn-bg: var(--bs-primary);
-  --color-btn-border-color: var(--bs-primary);
-  --color-btn-hover-color: var(--bs-text);
-  --color-btn-hover-bg: #002b74;
-  --color-btn-hover-border-color: #00296d;
-  --color-btn-active-color: var(--bs-text);
-  --color-btn-active-bg: #00296d;
-  --color-btn-active-border-color: #002666;
-  --color-btn-disabled-color: var(--bs-text);
-  --color-btn-disabled-bg: var(--bs-primary);
-  --color-btn-disabled-border-color: var(--bs-primary);
-
-  --color-inp-border-color: #ccc;
-  --color-inp-focus-border-color: #52a8eccc;
-
-  --color-link-color: var(--bs-primary);
-  --color-link-hover-color: #1a67ea;
+h1 {
+  margin-block: 0;
 }
 
 .btn {
-  @apply text-btn-color bg-btn-bg border-btn-border-color cursor-pointer rounded-md border border-solid px-3 py-1.5 transition-colors;
-  @apply hover:bg-btn-hover-bg hover:border-btn-hover-border-color;
-  @apply active:bg-btn-active-bg active:border-btn-active-border-color;
-  @apply disabled:bg-btn-disabled-bg disabled:border-btn-disabled-border-color disabled:cursor-default;
+  @apply text-btn-text bg-btn-bg border-btn-border hover:not-disabled:bg-btn-hover-bg hover:not-disabled:border-btn-hover-border active:not-disabled:bg-btn-active-bg active:not-disabled:border-btn-active-border disabled:opacity-65 flex cursor-pointer items-center rounded-md border border-solid px-3 py-1.5 font-sans transition-colors disabled:cursor-default;
   box-shadow:
     inset 0 1px 0 #ffffff26,
     0 1px 1px rgba(0, 0, 0, 0.075);
@@ -44,15 +18,15 @@
       rgba(0, 0, 0, 0.075) 0px 1px 1px 0px,
       rgba(38, 82, 154, 0.5) 0px 0px 0px 4px;
   }
-  &:disabled {
-    opacity: 0.65;
-  }
 }
 
 .inp-text {
-  @apply rounded-sm bg-white px-1.5 py-1 outline-none;
-  @apply border-inp-border-color border border-solid;
-  @apply focus:border-inp-focus-border-color;
+  @apply border-inp-border focus:border-inp-border-focus rounded border border-solid bg-white px-1.5 py-1 leading-normal outline-none;
+  font-family:
+    Helvetica Neue,
+    Helvetica,
+    Arial,
+    sans-serif;
   &:focus {
     box-shadow:
       inset 0 1px 1px rgba(0, 0, 0, 0.075),
@@ -61,6 +35,5 @@
 }
 
 .link {
-  @apply text-link-color;
-  @apply hover:text-link-hover-color hover:underline;
+  @apply text-link hover:text-link-hover hover:underline;
 }

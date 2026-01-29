@@ -1,10 +1,12 @@
 import { execSync } from "node:child_process";
+import { writeFileSync } from "node:fs";
 
 import { defineConfig } from "rolldown";
 
 import postcss from "postcss";
-// @ts-ignore
-import tailwindPostcss from "@tailwindcss/postcss";
+import { createPlugin as postcssUno } from "@unocss/postcss/esm";
+import postcssImport from "postcss-import";
+
 import { transform } from "lightningcss";
 
 const gitHash = (() => {
@@ -48,9 +50,9 @@ export default defineConfig({
       transform: async (code: string, id: string) => {
         if (!id.endsWith(".css")) return null;
         const processed: string = await new Promise((resolve) => {
-          postcss([tailwindPostcss])
+          postcss([postcssUno({}), postcssImport()])
             .process(code, {
-              from: "src/ui/index.css",
+              from: id,
             })
             .then((result) => {
               resolve(result.css);
@@ -65,6 +67,7 @@ export default defineConfig({
           .toString()
           .replaceAll(/\/\*!.*?\*\//g, "")
           .trim();
+        writeFileSync(`${process.cwd()}/dist/debug/${id.split(/\/|\\/).pop()}`, cleaned);
         return cleaned;
       },
     },

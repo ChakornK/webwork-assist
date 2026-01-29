@@ -1,7 +1,4 @@
-@layer theme, base, components, utilities;
-@import "tailwindcss/theme.css" layer(theme);
-/* @import "tailwindcss/preflight.css" layer(base); */
-@import "tailwindcss/utilities.css" layer(utilities);
+@unocss components;
 
 input[type="text"][id^="AnSwEr"] {
   @apply min-w-0;

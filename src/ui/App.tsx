@@ -19,7 +19,7 @@ function UiButtons() {
 
   return (
     <Fragment>
-      <div class={"flex gap-1"}>
+      <div class={"flex h-full gap-1"}>
         <SolveButton />
         <SettingsButton onClick={() => setSettingsOpen(true)} />
       </div>
