@@ -69,7 +69,7 @@ export default defineConfig({
           .trim();
 
         if (!existsSync(`${process.cwd()}/dist/debug`)) {
-          mkdirSync(`${process.cwd()}/dist/debug`);
+          mkdirSync(`${process.cwd()}/dist/debug`, { recursive: true });
         }
         writeFileSync(`${process.cwd()}/dist/debug/${id.split(/\/|\\/).pop()}`, cleaned);
 
