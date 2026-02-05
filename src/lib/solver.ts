@@ -71,7 +71,7 @@ export async function solve({
 
   // format input fields
   // make field id lowercase to avoid letter casing hallucinations
-  problemBody = problemBody.replaceAll(inputFieldRegex, (_, f) => `{{${f.toLowerCase()}}}`);
+  problemBody = problemBody.replaceAll(inputFieldRegex, (_, a, b) => `{{${(a || b).toLowerCase()}}}`);
 
   // format dropdowns
   problemBody = problemBody.replaceAll(
@@ -90,8 +90,8 @@ export async function solve({
     (m, f) =>
       `{{${f.toLowerCase().split("&#95;")[0]}: ${[...m.matchAll(radioOptionRegex)]
         .map((e) => e.slice(1))
-        .filter((e) => e[1] !== "?")
-        .map((e) => `"${e[0]}":"${e[1]}"`)
+        .filter((e) => (e[1] || e[3]) !== "?")
+        .map((e) => `"${e[0] || e[2]}":"${e[1] || e[3]}"`)
         .join(", ")}}}`,
   );
 
