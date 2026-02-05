@@ -10,15 +10,15 @@ const problemBodyRegex = /<div id="output_problem_body".*?>(?<problem>.*)<input 
 const notesRegex = /notes?:.*/i;
 const equationContentRegex = /<script.*?>(?<eq>.*?)<\/script>/gi;
 const equationImageRegex = /<img[^>]+?src="[^"]+?equations[^>]+?alt="(?<eq>.*?)"/gi;
-const inputFieldRegex = /<input.*?id="(.*?)".*?type="?text"?.*?<input.*?>/gi;
-const inputFieldRegex2 = /<input.*?type="?text"?.*?id="(.*?)".*?<input.*?>/gi;
+const inputFieldRegex = /<input[^>]*?id="(.*?)"[^>]*?type="?text"?[^>]*?><input.*?>/gi;
+const inputFieldRegex2 = /<input[^>]*?type="?text"?[^>]*?id="(.*?)"[^>]*?><input.*?>/gi;
 const linebreakRegex = /<br>/gi;
 
 const dropdownRegex = /<select.*?id="(.*?)".*?>.*?<\/select>/gis;
 const optionsRegex = /<option value="(.*?)".*?>.*?<\/option>/gis;
 
-const radioGroupRegex = /<label><input.*?type="radio".*?id="(.*?)".*?<\/label>(<br><label>.*?<\/label>)+/gis;
-const radioOptionRegex = /<label><input.*?type="radio".*?value="(.*?)".*?>(.*?)<\/label>/gis;
+const radioGroupRegex = /<label><input[^>]*?type="radio"[^>]*?id="(.*?)"[^>]*?><\/label>(<br><label>.*?<\/label>)+/gis;
+const radioOptionRegex = /<label><input[^>]*?type="radio"[^>]*?value="(.*?)"[^>]*?>(.*?)<\/label>/gis;
 
 const wrappingElRemovalRegex = /<(div|b|i|ul|ol|p|span)( [^<]+?)?>(.*?)<\/\1>/gs;
 
