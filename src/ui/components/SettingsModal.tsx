@@ -22,7 +22,7 @@ export default function SettingsModal({ open, onClose }: { open: boolean; onClos
           <h1 class={"text-2xl font-semibold"}>WebWork Assist Settings</h1>
 
           <a class={"mt-2"}>
-            Gemini API key (
+            Gemini API keys (comma-separated) (
             <a class={"link cursor-help"} href={"https://aistudio.google.com/app/api-keys"} target={"_blank"}>
               ?
             </a>
@@ -31,7 +31,7 @@ export default function SettingsModal({ open, onClose }: { open: boolean; onClos
           <input
             type="text"
             class={"inp-text"}
-            placeholder={"AIzaXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"}
+            placeholder={"AIzaXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX,AIzaXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"}
             value={tempGeminiApiKey}
             onInput={(e) => setTempGeminiApiKey(e.currentTarget.value)}
           />
