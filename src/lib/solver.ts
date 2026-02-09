@@ -4,7 +4,7 @@ import { console, fetch } from "./unpoison";
 
 const geminiUrl = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent";
 
-const jsonResRegex = /{.*}/is;
+const jsonResRegex = /{.*?}/gis;
 
 const problemBodyRegex = /<div id="output_problem_body".*?>(?<problem>.*)<input id="num_attempts"/is;
 const notesRegex = /notes?:.*/i;
@@ -156,7 +156,7 @@ export async function solve({
     return onFinish(false, res.error.message);
   }
 
-  const solutions = JSON.parse(res.candidates[0].content.parts[0].text.match(jsonResRegex)[0]);
+  const solutions = JSON.parse(res.candidates[0].content.parts[0].text.match(jsonResRegex).slice(-1)[0]);
   console.log("Solutions:", solutions);
 
   // fill answers
