@@ -648,12 +648,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:*, @types/node@npm:>=10.0.0, @types/node@npm:^25.0.10":
+"@types/node@npm:*, @types/node@npm:>=10.0.0":
   version: 25.1.0
   resolution: "@types/node@npm:25.1.0"
   dependencies:
     undici-types: "npm:~7.16.0"
   checksum: 10c0/5f393a127dc9565e2e152514a271455d580c7095afc51302e73ffe8aac3526b64ebacc3c10dd40c93cef81a95436ef2c6a8b522930df567a3f6b189c0eef649a
+  languageName: node
+  linkType: hard
+
+"@types/node@npm:^25.2.3":
+  version: 25.2.3
+  resolution: "@types/node@npm:25.2.3"
+  dependencies:
+    undici-types: "npm:~7.16.0"
+  checksum: 10c0/925833029ce0bb4a72c36f90b93287184d3511aeb0fa60a994ae94b5430c22f9be6693d67d210df79267cb54c6f6978caaefb149d99ab5f83af5827ba7cb9822
   languageName: node
   linkType: hard
 
@@ -856,7 +865,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@unocss/reset@npm:66.6.0, @unocss/reset@npm:^66.6.0":
+"@unocss/reset@npm:66.6.0":
   version: 66.6.0
   resolution: "@unocss/reset@npm:66.6.0"
   checksum: 10c0/9d1d7113ca8b7efb27c83c829b12f0ef721462db244717fde2393cf77572b8d209ae459d915d7d3d8d18fdc1410ecbc0baa9c60b66e7979c298b036be0b8e5de
@@ -3591,9 +3600,8 @@ __metadata:
   resolution: "webwork-assist@workspace:."
   dependencies:
     "@rolldown-plugin/solid": "npm:^0.0.1"
-    "@types/node": "npm:^25.0.10"
+    "@types/node": "npm:^25.2.3"
     "@unocss/postcss": "npm:^66.6.0"
-    "@unocss/reset": "npm:^66.6.0"
     "@violentmonkey/types": "npm:^0.3.2"
     concurrently: "npm:^9.2.1"
     lightningcss: "npm:^1.31.1"
