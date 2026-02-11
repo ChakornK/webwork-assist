@@ -2,6 +2,7 @@ import { execSync } from "node:child_process";
 import { existsSync, mkdirSync, writeFileSync } from "node:fs";
 
 import { defineConfig } from "rolldown";
+import solid from "@rolldown-plugin/solid";
 
 import postcss from "postcss";
 import { createPlugin as postcssUno } from "@unocss/postcss/esm";
@@ -45,6 +46,7 @@ export default defineConfig({
     ".css": "text",
   },
   plugins: [
+    solid(),
     {
       name: "postcss",
       transform: async (code: string, id: string) => {

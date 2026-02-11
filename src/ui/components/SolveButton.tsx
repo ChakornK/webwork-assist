@@ -1,25 +1,26 @@
-import { useState } from "preact/hooks";
+import { createSignal } from "solid-js";
 import { solve } from "../../lib/solver";
-import { useStorage } from "src/hooks/useStorage";
+import { createGmStorage } from "src/hooks/createGmStorage";
 
 export default function SolveButton() {
-  const [msg, setMsg] = useState("");
-  const [disabled, setDisabled] = useState(false);
+  const [msg, setMsg] = createSignal("");
+  const [disabled, setDisabled] = createSignal(false);
 
-  const [geminiApiKey] = useStorage("geminiApiKey", "", false);
-  const [geminiKeyIndex, setGeminiKeyIndex] = useStorage("geminiKeyIndex", 0, false);
-  const [blacklistedKeys, setBlacklistedKeys] = useState([]);
+  const [geminiApiKey] = createGmStorage("geminiApiKey", "", false);
+  const [geminiKeyIndex, setGeminiKeyIndex] = createGmStorage("geminiKeyIndex", 0, false);
+  const [blacklistedKeys, setBlacklistedKeys] = createSignal([]);
 
   return (
     <button
       class={"btn"}
-      disabled={disabled}
-      onClick={(e) => {
-        if (disabled) return;
+      disabled={disabled()}
+      on:click={() => {
+        if (disabled()) return;
         setDisabled(true);
         try {
+          const gk = geminiApiKey();
           solve({
-            geminiApiKey: geminiApiKey.includes(",") ? geminiApiKey.split(",")[geminiKeyIndex].trim() : geminiApiKey,
+            geminiApiKey: gk.includes(",") ? gk.split(",")[geminiKeyIndex()].trim() : gk,
             onProgressUpdate: (status) => {
               setMsg(status);
             },
@@ -28,10 +29,10 @@ export default function SolveButton() {
               if (!success) {
                 if (
                   message.includes("Quota exceeded") &&
-                  geminiApiKey.includes(",") &&
-                  geminiApiKey.split(",").filter((k: string) => !blacklistedKeys.includes(k.trim())).length > 0
+                  gk.includes(",") &&
+                  gk.split(",").filter((k: string) => !blacklistedKeys().includes(k.trim())).length > 0
                 ) {
-                  setBlacklistedKeys((old) => [...old, geminiApiKey.split(",")[geminiKeyIndex].trim()]);
+                  setBlacklistedKeys((old) => [...old, gk.split(",")[geminiKeyIndex()].trim()]);
                   retry = true;
                 } else {
                   alert(`Something went wrong: ${message}\nCheck the console for more info`);
@@ -40,10 +41,10 @@ export default function SolveButton() {
               setMsg("");
               setDisabled(false);
 
-              if (!geminiApiKey.includes(",")) return;
+              if (!gk.includes(",")) return;
 
-              let newKeyIndex = (geminiKeyIndex + 1) % geminiApiKey.split(",").length;
-              while (blacklistedKeys.includes(geminiApiKey.split(",")[newKeyIndex].trim())) {
+              let newKeyIndex = (geminiKeyIndex() + 1) % gk.split(",").length;
+              while (blacklistedKeys().includes(gk.split(",")[newKeyIndex].trim())) {
                 newKeyIndex += 1;
               }
               setGeminiKeyIndex(newKeyIndex);
@@ -64,7 +65,7 @@ export default function SolveButton() {
         }
       }}
     >
-      {msg || "WebWork Assist"}
+      {msg() || "WebWork Assist"}
     </button>
   );
 }

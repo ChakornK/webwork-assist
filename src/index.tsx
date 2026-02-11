@@ -1,4 +1,4 @@
-import { render } from "preact";
+import { render } from "solid-js/web";
 import App from "./ui/App";
 
 // @ts-ignore
@@ -26,6 +26,6 @@ const observer = new MutationObserver(() => {
   globalStyleSheet.replaceSync(globalStyles);
   document.adoptedStyleSheets.push(globalStyleSheet);
 
-  render(<App />, shadowRoot);
+  render(() => <App />, shadowRoot);
 });
 observer.observe(document.documentElement, { childList: true, subtree: true });
