@@ -1,6 +1,6 @@
-export default function SettingsButton({ onClick }: { onClick: () => void }) {
+export default function SettingsButton(props: { onClick: () => void }) {
   return (
-    <button class={"btn"} onClick={onClick}>
+    <button class={"btn"} on:click={props.onClick}>
       <SettingsIcon />
     </button>
   );
