@@ -1,5 +1,5 @@
 import "@violentmonkey/types";
-import { type Accessor, createEffect, createSignal, onCleanup, type Setter } from "solid-js";
+import { type Accessor, createSignal, onCleanup } from "solid-js";
 
 export const createGmStorage = <T>(
   key: string,
