@@ -11,16 +11,16 @@ const notesRegex = /notes?:.*/i;
 const equationContentRegex = /<script.*?>(?<eq>.*?)<\/script>/gi;
 const equationImageRegex = /<img[^>]+?src="[^"]+?equations[^>]+?alt="(?<eq>.*?)"/gi;
 const inputFieldRegex =
-  /<input[^>]*?id="(.*?)"[^>]*?type="?text"?[^>]*?><input.*?>|<input[^>]*?type="?text"?[^>]*?id="(.*?)"[^>]*?><input.*?>/gi;
+  /<input[^>]*?id="([^"]*?)"[^>]*?type="?text"?[^>]*?><input.*?>|<input[^>]*?type="?text"?[^>]*?id="([^"]*?)"[^>]*?><input.*?>/gi;
 const linebreakRegex = /<br>/gi;
 
-const dropdownRegex = /<select.*?id="(.*?)".*?>.*?<\/select>/gis;
-const optionsRegex = /<option value="(.*?)".*?>.*?<\/option>/gis;
+const dropdownRegex = /<select[^>]*?id="([^"]*?)"[^>]*?>.*?<\/select>/gis;
+const optionsRegex = /<option[^>]*?value="([^"]*?)"[^>]*?>.*?<\/option>/gis;
 
 const radioGroupRegex =
-  /<label><input[^>]*?type="radio"[^>]*?id="(.*?)"[^>]*?>.*?<\/label>(<br><label>.*?<\/label>)+/gis;
+  /<label><input[^>]*?type="radio"[^>]*?id="([^"]*?)"[^>]*?>.*?<\/label>(<br><label>.*?<\/label>)+/gis;
 const radioOptionRegex =
-  /<label><input[^>]*?type="radio"[^>]*?value="(.*?)"[^>]*?>(.*?)<\/label>|<label><input[^>]*?value="(.*?)"[^>]*?type="radio"[^>]*?>(.*?)<\/label>/gis;
+  /<label><input[^>]*?type="radio"[^>]*?value="([^"]*?)"[^>]*?>(.*?)<\/label>|<label><input[^>]*?value="([^"]*?)"[^>]*?type="radio"[^>]*?>(.*?)<\/label>/gis;
 
 const wrappingElRemovalRegex = /<(div|b|i|ul|ol|p|span)( [^<]+?)?>(.*?)<\/\1>/gs;
 
