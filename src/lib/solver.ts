@@ -1,3 +1,4 @@
+import { convertImage } from "./image";
 import { console, fetch } from "./unpoison";
 
 const jsonResRegex = /{.*?}/gis;
@@ -111,25 +112,12 @@ export async function solve({
   problemBody = problemBody.replaceAll(linebreakRegex, "\n");
   problemBody = problemBody.replaceAll("&#92;", "\\");
 
-  console.log("Problem body: ", problemBody);
-
   onProgressUpdate("Processing images...");
-  problemBody = problemBody.replaceAll(imgRemovalRegex, "");
-  const imgUrls = [...document.querySelectorAll(".image-view-elt")].map((e) => e.getAttribute("src"));
-  const imgPromises = imgUrls.map((url) =>
-    fetch(url)
-      .then((r) => r.blob())
-      .then(
-        (b) =>
-          new Promise((resolve, reject) => {
-            const reader = new FileReader();
-            reader.onloadend = () => resolve(reader.result);
-            reader.onerror = reject;
-            reader.readAsDataURL(b);
-          }),
-      ),
-  );
-  const imgB64s = (await Promise.all(imgPromises)).filter((e) => typeof e === "string");
+  let imgCounter = 1;
+  problemBody = problemBody.replaceAll(imgRemovalRegex, () => `{{image ${imgCounter++}}}`);
+  const imgB64s = [...document.querySelectorAll(".image-view-elt")].map(convertImage);
+
+  console.log("Problem body: ", problemBody);
   console.log("Images: ", imgB64s);
 
   if (preview) {
