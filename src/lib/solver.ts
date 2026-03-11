@@ -16,9 +16,14 @@ const dropdownRegex = /<select[^>]*?id="([^"]*?)"[^>]*?>.*?<\/select>/gis;
 const optionsRegex = /<option[^>]*?value="([^"]*?)"[^>]*?>.*?<\/option>/gis;
 
 const radioGroupRegex =
-  /<label><input[^>]*?(type="radio"[^>]*?id="([^"]*?)"|id="([^"]*?)"[^>]*?type="radio")[^>]*?>.*?<\/label>((<br>)?<label>.*?<\/label>)+/gis;
+  /<label><input[^>]*? ?(?:type="radio"[^>]*?id="([^"]*?)"|id="([^"]*?)"[^>]*?type="radio")[^>]*?>.*?<\/label>(( ?<br> ?)*<label>.*?<\/label>)+/gis;
 const radioOptionRegex =
-  /<label><input[^>]*? (type="radio"[^>]*?value="([^"]*?)"|value="([^"]*?)"[^>]*?type="radio") [^>]*?>(.*?)<\/label>/gis;
+  /<label><input[^>]*? ?(?:type="radio"[^>]*?value="([^"]*?)"|value="([^"]*?)"[^>]*?type="radio") ?[^>]*?>(.*?)<\/label>/gis;
+
+const checkboxGroupRegex =
+  /<label><input[^>]*? ?(?:type="checkbox"[^>]*?id="([^"]*?)"|id="([^"]*?)"[^>]*?type="checkbox")[^>]*?>.*?<\/label>(( ?<br> ?)*<label>.*?<\/label>)+/gis;
+const checkboxOptionRegex =
+  /<label><input[^>]*? ?(?:type="checkbox"[^>]*?value="([^"]*?)"|value="([^"]*?)"[^>]*?type="checkbox") ?[^>]*?>(.*?)<\/label>/gis;
 
 const wrappingElRemovalRegex = /<(div|b|i|ul|ol|p|span)( [^<]+?)?>(.*?)<\/\1>/gs;
 
@@ -88,11 +93,18 @@ export async function solve({
   // format radio groups
   problemBody = problemBody.replaceAll(
     radioGroupRegex,
-    (m, f) =>
-      `{{${f.toLowerCase().split("&#95;")[0]}: ${[...m.matchAll(radioOptionRegex)]
-        .map((e) => e.slice(1))
-        .filter((e) => (e[1] || e[3]) !== "?")
-        .map((e) => `"${e[0] || e[2]}":"${e[1] || e[3]}"`)
+    (m, f1, f2) =>
+      `{{${(f1 || f2).toLowerCase().split("&#95;")[0]}: ${[...m.matchAll(radioOptionRegex)]
+        .map((e) => `"${e[1] || e[2]}":"${e[3]}"`)
+        .join(", ")}}}`,
+  );
+
+  // format checkbox groups
+  problemBody = problemBody.replaceAll(
+    checkboxGroupRegex,
+    (m, f1, f2) =>
+      `{{${(f1 || f2).toLowerCase().split("&#95;")[0]}: ${[...m.matchAll(checkboxOptionRegex)]
+        .map((e) => `"${e[1] || e[2]}":"${e[3]}"`)
         .join(", ")}}}`,
   );
 
@@ -178,6 +190,19 @@ export async function solve({
             (e) => e.parentElement.innerText.replaceAll(/( |\n)/g, "") == value.replaceAll(/( |\n)/g, ""),
           ) as HTMLInputElement | null
         )?.click();
+      }
+    } else if (el.type === "checkbox") {
+      for (const _v of value.split(",")) {
+        const v = _v.trim();
+        try {
+          (document.querySelector(`[id^='${targetId}'][value*='${v}']`) as HTMLInputElement | null)?.click();
+        } catch {
+          (
+            [...document.querySelectorAll(`[id^='${targetId}']`)].find(
+              (e) => e.parentElement.innerText.replaceAll(/( |\n)/g, "") == v.replaceAll(/( |\n)/g, ""),
+            ) as HTMLInputElement | null
+          )?.click();
+        }
       }
     } else {
       el.value = value;
