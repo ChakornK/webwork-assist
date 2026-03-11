@@ -6,8 +6,8 @@ import geminiPrompt from "../../lib/prompt.txt";
 
 const models = {
   "⭐🐇 Gemini 3.1 Flash Lite": "gemini-3.1-flash-lite-preview",
-  "⭐🐇 Gemini 2.5 Flash": "gemini-2.5-flash",
   "⭐🐢 Gemini 3 Flash": "gemini-3-flash-preview",
+  "⭐🐇 Gemini 2.5 Flash": "gemini-2.5-flash",
   "Gemini 3.1 Pro": "gemini-3.1-pro-preview",
   "Gemini 2.5 Flash Lite": "gemini-2.5-flash-lite",
   "Gemini 2.5 Pro": "gemini-2.5-pro",
