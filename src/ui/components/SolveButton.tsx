@@ -7,6 +7,7 @@ export default function SolveButton() {
   const [disabled, setDisabled] = createSignal(false);
 
   const [geminiApiKey] = createGmStorage("geminiApiKey", "", false);
+  const [selectedModel] = createGmStorage("selectedModel", "gemini-3.1-flash-lite-preview", false);
   const [geminiKeyIndex, setGeminiKeyIndex] = createGmStorage("geminiKeyIndex", 0, false);
   const [blacklistedKeys, setBlacklistedKeys] = createSignal([]);
 
@@ -21,6 +22,7 @@ export default function SolveButton() {
           const gk = geminiApiKey();
           await solve({
             geminiApiKey: gk.includes(",") ? gk.split(",")[geminiKeyIndex()].trim() : gk,
+            modelName: selectedModel(),
             onProgressUpdate: (status) => {
               setMsg(status);
             },

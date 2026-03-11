@@ -1,13 +1,32 @@
 import { createSignal } from "solid-js";
 import { createGmStorage } from "src/hooks/createGmStorage";
 
+const models = {
+  "⭐🐇 Gemini 3.1 Flash Lite": "gemini-3.1-flash-lite-preview",
+  "⭐🐇 Gemini 2.5 Flash": "gemini-2.5-flash",
+  "⭐🐢 Gemini 3 Flash": "gemini-3-flash-preview",
+  "Gemini 3.1 Pro": "gemini-3.1-pro-preview",
+  "Gemini 2.5 Flash Lite": "gemini-2.5-flash-lite",
+  "Gemini 2.5 Pro": "gemini-2.5-pro",
+  "Gemini 2.0 Flash": "gemini-2.0-flash",
+  "Gemini 2.0 Flash Lite": "gemini-2.0-flash-lite",
+  "Gemma 3 27B": "gemma-3-27b-it",
+};
+
 export default function SettingsModal(props: { open: boolean; onClose: () => void }) {
   const [geminiApiKey, setGeminiApiKey] = createGmStorage<string>("geminiApiKey", "", false);
+  const [selectedModel, setSelectedModel] = createGmStorage<string>(
+    "selectedModel",
+    "gemini-3.1-flash-lite-preview",
+    false,
+  );
   const [tempGeminiApiKey, setTempGeminiApiKey] = createSignal<string>(geminiApiKey());
+  const [tempSelectedModel, setTempSelectedModel] = createSignal<string>(selectedModel());
 
   const onCancel = () => {
     props.onClose();
     setTempGeminiApiKey(geminiApiKey());
+    setTempSelectedModel(selectedModel());
   };
 
   return (
@@ -21,7 +40,18 @@ export default function SettingsModal(props: { open: boolean; onClose: () => voi
         >
           <h1 class={"text-2xl font-semibold"}>WebWork Assist Settings</h1>
 
-          <p class={"mt-2"}>
+          <p class={"mb-0 mt-2"}>Model</p>
+          <select
+            class={"inp-text"}
+            value={tempSelectedModel()}
+            on:input={(e) => setTempSelectedModel(e.currentTarget.value)}
+          >
+            {Object.entries(models).map(([name, value]) => (
+              <option value={value}>{name}</option>
+            ))}
+          </select>
+
+          <p class={"mb-0 mt-2"}>
             Gemini API keys (comma-separated) (
             <a class={"link cursor-help"} href={"https://aistudio.google.com/app/api-keys"} target={"_blank"}>
               ?
@@ -45,6 +75,7 @@ export default function SettingsModal(props: { open: boolean; onClose: () => voi
               on:click={() => {
                 props.onClose();
                 setGeminiApiKey(tempGeminiApiKey());
+                setSelectedModel(tempSelectedModel());
               }}
             >
               Save

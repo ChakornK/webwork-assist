@@ -2,8 +2,6 @@
 import geminiPrompt from "./prompt.txt";
 import { console, fetch } from "./unpoison";
 
-const geminiUrl = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent";
-
 const jsonResRegex = /{.*?}/gis;
 
 const problemBodyRegex = /<div id="output_problem_body".*?>(?<problem>.*)<input id="num_attempts"/is;
@@ -28,12 +26,14 @@ const imgRemovalRegex = /<img.+?>/gi;
 
 export async function solve({
   geminiApiKey,
+  modelName,
   onProgressUpdate,
   onFinish,
   autosubmit,
   preview,
 }: {
   geminiApiKey: string;
+  modelName: string;
   onProgressUpdate: (status: string) => void;
   onFinish: (success: boolean, message: string) => void;
   autosubmit?: boolean;
@@ -42,6 +42,7 @@ export async function solve({
   if (!geminiApiKey) {
     return onFinish(false, "Missing API key!");
   }
+  const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/${modelName}:generateContent`;
 
   onProgressUpdate("Parsing problem...");
 
@@ -149,7 +150,11 @@ export async function solve({
         },
       ],
     }),
-  }).then((r) => r.json());
+  })
+    .then((r) => r.json())
+    .catch((e) => {
+      throw new Error("Gemini API error: " + e.message);
+    });
   console.log("Raw response:", res);
 
   if (res.error) {
