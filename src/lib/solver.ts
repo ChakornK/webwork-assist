@@ -1,5 +1,3 @@
-// @ts-ignore
-import geminiPrompt from "./prompt.txt";
 import { console, fetch } from "./unpoison";
 
 const jsonResRegex = /{.*?}/gis;
@@ -32,6 +30,7 @@ const imgRemovalRegex = /<img.+?>/gi;
 export async function solve({
   geminiApiKey,
   modelName,
+  systemPrompt,
   onProgressUpdate,
   onFinish,
   autosubmit,
@@ -39,6 +38,7 @@ export async function solve({
 }: {
   geminiApiKey: string;
   modelName: string;
+  systemPrompt: string;
   onProgressUpdate: (status: string) => void;
   onFinish: (success: boolean, message: string) => void;
   autosubmit?: boolean;
@@ -156,7 +156,7 @@ export async function solve({
               },
             })),
             {
-              text: `${geminiPrompt}${problemBody}`,
+              text: `${systemPrompt}${problemBody}`,
             },
           ],
         },

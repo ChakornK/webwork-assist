@@ -2,12 +2,16 @@ import { createSignal } from "solid-js";
 import { solve } from "../../lib/solver";
 import { createGmStorage } from "src/hooks/createGmStorage";
 
+// @ts-ignore
+import geminiPrompt from "../../lib/prompt.txt";
+
 export default function SolveButton() {
   const [msg, setMsg] = createSignal("");
   const [disabled, setDisabled] = createSignal(false);
 
   const [geminiApiKey] = createGmStorage("geminiApiKey", "", false);
   const [selectedModel] = createGmStorage("selectedModel", "gemini-3.1-flash-lite-preview", false);
+  const [systemPrompt] = createGmStorage("systemPrompt", geminiPrompt, false);
   const [geminiKeyIndex, setGeminiKeyIndex] = createGmStorage("geminiKeyIndex", 0, false);
   const [blacklistedKeys, setBlacklistedKeys] = createSignal([]);
 
@@ -23,6 +27,7 @@ export default function SolveButton() {
           await solve({
             geminiApiKey: gk.includes(",") ? gk.split(",")[geminiKeyIndex()].trim() : gk,
             modelName: selectedModel(),
+            systemPrompt: systemPrompt(),
             onProgressUpdate: (status) => {
               setMsg(status);
             },

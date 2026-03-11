@@ -1,6 +1,9 @@
 import { createSignal } from "solid-js";
 import { createGmStorage } from "src/hooks/createGmStorage";
 
+// @ts-ignore
+import geminiPrompt from "../../lib/prompt.txt";
+
 const models = {
   "⭐🐇 Gemini 3.1 Flash Lite": "gemini-3.1-flash-lite-preview",
   "⭐🐇 Gemini 2.5 Flash": "gemini-2.5-flash",
@@ -20,13 +23,23 @@ export default function SettingsModal(props: { open: boolean; onClose: () => voi
     "gemini-3.1-flash-lite-preview",
     false,
   );
+  const [systemPrompt, setSystemPrompt] = createGmStorage<string>("systemPrompt", geminiPrompt, false);
   const [tempGeminiApiKey, setTempGeminiApiKey] = createSignal<string>(geminiApiKey());
   const [tempSelectedModel, setTempSelectedModel] = createSignal<string>(selectedModel());
+  const [tempSystemPrompt, setTempSystemPrompt] = createSignal<string>(systemPrompt());
 
   const onCancel = () => {
     props.onClose();
     setTempGeminiApiKey(geminiApiKey());
     setTempSelectedModel(selectedModel());
+    setTempSystemPrompt(systemPrompt());
+  };
+
+  const onSave = () => {
+    props.onClose();
+    setGeminiApiKey(tempGeminiApiKey());
+    setSelectedModel(tempSelectedModel());
+    setSystemPrompt(tempSystemPrompt());
   };
 
   return (
@@ -66,18 +79,29 @@ export default function SettingsModal(props: { open: boolean; onClose: () => voi
             on:input={(e) => setTempGeminiApiKey(e.currentTarget.value)}
           />
 
+          <p class={"mb-0 mt-2"}>
+            System prompt (
+            <button
+              class={"link cursor-pointer border-none bg-[#0000] p-0"}
+              on:click={() => setTempSystemPrompt(geminiPrompt)}
+            >
+              reset
+            </button>
+            )
+          </p>
+          <textarea
+            class={"inp-text resize-y"}
+            placeholder={geminiPrompt}
+            rows={5}
+            value={tempSystemPrompt()}
+            on:input={(e) => setTempSystemPrompt(e.currentTarget.value)}
+          />
+
           <div class={"mt-2 flex justify-end gap-1"}>
             <button class={"btn"} on:click={onCancel}>
               Cancel
             </button>
-            <button
-              class={"btn"}
-              on:click={() => {
-                props.onClose();
-                setGeminiApiKey(tempGeminiApiKey());
-                setSelectedModel(tempSelectedModel());
-              }}
-            >
+            <button class={"btn"} on:click={onSave}>
               Save
             </button>
           </div>
