@@ -14,12 +14,12 @@ export default function SolveButton() {
     <button
       class={"btn"}
       disabled={disabled()}
-      on:click={() => {
+      on:click={async () => {
         if (disabled()) return;
         setDisabled(true);
         try {
           const gk = geminiApiKey();
-          solve({
+          await solve({
             geminiApiKey: gk.includes(",") ? gk.split(",")[geminiKeyIndex()].trim() : gk,
             onProgressUpdate: (status) => {
               setMsg(status);
