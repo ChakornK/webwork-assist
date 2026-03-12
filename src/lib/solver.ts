@@ -180,6 +180,11 @@ export async function solve({
         )?.click();
       }
     } else if (el.type === "checkbox") {
+      for (const el of [...document.querySelectorAll(`[id^='${targetId}'][value]`)] as HTMLInputElement[]) {
+        try {
+          if (el.checked) el.click();
+        } catch {}
+      }
       for (const _v of value.split(",")) {
         const v = _v.trim();
         try {
