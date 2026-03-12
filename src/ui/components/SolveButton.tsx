@@ -10,7 +10,7 @@ export default function SolveButton() {
   const [disabled, setDisabled] = createSignal(false);
 
   const [geminiApiKey] = createGmStorage("geminiApiKey", "", false);
-  const [selectedModel] = createGmStorage("selectedModel", "gemini-3.1-flash-lite-preview", false);
+  const [selectedModel] = createGmStorage("selectedModel", "gemini-3-flash-preview", false);
   const [systemPrompt] = createGmStorage("systemPrompt", geminiPrompt, false);
   const [geminiKeyIndex, setGeminiKeyIndex] = createGmStorage("geminiKeyIndex", 0, false);
   const [blacklistedKeys, setBlacklistedKeys] = createSignal([]);

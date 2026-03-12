@@ -5,8 +5,8 @@ import { createGmStorage } from "src/hooks/createGmStorage";
 import geminiPrompt from "../../lib/prompt.txt";
 
 const models = {
-  "⭐🐇 Gemini 3.1 Flash Lite": "gemini-3.1-flash-lite-preview",
   "⭐🐢 Gemini 3 Flash": "gemini-3-flash-preview",
+  "⭐🐇 Gemini 3.1 Flash Lite": "gemini-3.1-flash-lite-preview",
   "⭐🐇 Gemini 2.5 Flash": "gemini-2.5-flash",
   "Gemini 3.1 Pro": "gemini-3.1-pro-preview",
   "Gemini 2.5 Flash Lite": "gemini-2.5-flash-lite",
@@ -18,11 +18,7 @@ const models = {
 
 export default function SettingsModal(props: { open: boolean; onClose: () => void }) {
   const [geminiApiKey, setGeminiApiKey] = createGmStorage<string>("geminiApiKey", "", false);
-  const [selectedModel, setSelectedModel] = createGmStorage<string>(
-    "selectedModel",
-    "gemini-3.1-flash-lite-preview",
-    false,
-  );
+  const [selectedModel, setSelectedModel] = createGmStorage<string>("selectedModel", "gemini-3-flash-preview", false);
   const [systemPrompt, setSystemPrompt] = createGmStorage<string>("systemPrompt", geminiPrompt, false);
   const [tempGeminiApiKey, setTempGeminiApiKey] = createSignal<string>(geminiApiKey());
   const [tempSelectedModel, setTempSelectedModel] = createSignal<string>(selectedModel());
