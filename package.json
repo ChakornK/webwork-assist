@@ -8,14 +8,13 @@
     "build": "rolldown -c",
     "format": "prettier --write ./src"
   },
-  "packageManager": "yarn@4.12.0+sha512.f45ab632439a67f8bc759bf32ead036a1f413287b9042726b7cc4818b7b49e14e9423ba49b18f9e06ea4941c1ad062385b1d8760a8d5091a1a31e5f6219afca8",
   "dependencies": {
     "solid-js": "^1.9.11"
   },
   "devDependencies": {
-    "@rolldown-plugin/solid": "^0.0.2",
-    "@types/node": "^25.4.0",
-    "@unocss/postcss": "^66.6.6",
+    "@rolldown-plugin/solid": "^0.0.3",
+    "@types/node": "^25.5.0",
+    "@unocss/postcss": "^66.6.7",
     "@violentmonkey/types": "^0.3.2",
     "concurrently": "^9.2.1",
     "lightningcss": "^1.32.0",
@@ -26,6 +25,7 @@
     "rolldown": "^1.0.0-rc.1",
     "ts-node": "^10.9.2",
     "typescript": "^5.9.3",
-    "unocss": "^66.6.6"
-  }
+    "unocss": "^66.6.7"
+  },
+  "packageManager": "yarn@4.13.0"
 }
