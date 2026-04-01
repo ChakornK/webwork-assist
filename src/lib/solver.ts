@@ -5,7 +5,7 @@ const jsonResRegex = /{.*?}/gis;
 
 const problemBodyRegex = /<div id="output_problem_body".*?>(?<problem>.*)<input id="num_attempts"/is;
 const notesRegex = /notes?:.*/i;
-const equationContentRegex = /<script.*?>(?<eq>.*?)<\/script>/gi;
+const equationContentRegex = /<script.*?>(?:\\displaystyle\n?)?(?<eq>(.|\n)*?)<\/script>/gi;
 const equationImageRegex = /<img[^>]+?src="[^"]+?equations[^>]+?alt="(?<eq>.*?)"/gi;
 const inputFieldRegex =
   /<input[^>]*?id="([^"]*?)"[^>]*?type="?text"?[^>]*?><input.*?>|<input[^>]*?type="?text"?[^>]*?id="([^"]*?)"[^>]*?><input.*?>/gi;
