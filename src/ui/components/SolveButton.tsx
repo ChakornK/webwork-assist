@@ -1,19 +1,19 @@
 import { createSignal } from "solid-js";
-import { solve } from "../../lib/solver";
-import { createGmStorage } from "src/hooks/createGmStorage";
+import { solve } from "@/lib/solver";
+import { createGmStorage } from "@/hooks/createGmStorage";
 
 // @ts-ignore
-import geminiPrompt from "../../lib/prompt.txt";
+import geminiPrompt from "@/lib/prompt.txt";
 
 export default function SolveButton() {
-  const [msg, setMsg] = createSignal("");
-  const [disabled, setDisabled] = createSignal(false);
+  const [msg, setMsg] = createSignal<string>("");
+  const [disabled, setDisabled] = createSignal<boolean>(false);
 
   const [geminiApiKey] = createGmStorage("geminiApiKey", "", false);
   const [selectedModel] = createGmStorage("selectedModel", "gemini-3-flash-preview", false);
   const [systemPrompt] = createGmStorage("systemPrompt", geminiPrompt, false);
   const [geminiKeyIndex, setGeminiKeyIndex] = createGmStorage("geminiKeyIndex", 0, false);
-  const [blacklistedKeys, setBlacklistedKeys] = createSignal([]);
+  const [blacklistedKeys, setBlacklistedKeys] = createSignal<string[]>([]);
 
   return (
     <button

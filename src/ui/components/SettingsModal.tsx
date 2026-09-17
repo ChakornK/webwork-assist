@@ -1,8 +1,8 @@
 import { createSignal } from "solid-js";
-import { createGmStorage } from "src/hooks/createGmStorage";
+import { createGmStorage } from "@/hooks/createGmStorage";
 
 // @ts-ignore
-import geminiPrompt from "../../lib/prompt.txt";
+import geminiPrompt from "@/lib/prompt.txt";
 
 const models = {
   "⭐ Gemini Flash": "gemini-flash-latest",

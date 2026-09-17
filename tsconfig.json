@@ -9,8 +9,10 @@
     "esModuleInterop": true,
     "isolatedModules": true,
     "noEmit": true,
-    "baseUrl": "./",
     "jsx": "preserve",
-    "jsxImportSource": "solid-js"
+    "jsxImportSource": "solid-js",
+    "paths": {
+      "@/*": ["./src/*"]
+    }
   }
 }

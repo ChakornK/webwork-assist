@@ -1,8 +1,8 @@
 import { createSignal } from "solid-js";
-import { Unpoison } from "../lib/unpoison";
-import SolveButton from "./components/SolveButton";
-import SettingsButton from "./components/SettingsButton";
-import SettingsModal from "./components/SettingsModal";
+import { Unpoison } from "@/lib/unpoison";
+import SolveButton from "@/ui/components/SolveButton";
+import SettingsButton from "@/ui/components/SettingsButton";
+import SettingsModal from "@/ui/components/SettingsModal";
 
 export default function App() {
   return (

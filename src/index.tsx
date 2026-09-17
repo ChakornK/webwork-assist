@@ -1,10 +1,10 @@
 import { render } from "solid-js/web";
-import App from "./ui/App";
+import App from "@/ui/App";
 
 // @ts-ignore
-import appStyles from "./ui/app.css" with { type: "css" };
+import appStyles from "@/ui/app.css" with { type: "css" };
 // @ts-ignore
-import globalStyles from "./ui/global.css" with { type: "css" };
+import globalStyles from "@/ui/global.css" with { type: "css" };
 
 const observer = new MutationObserver(() => {
   const injectionTarget = document.querySelector(".sticky-nav");

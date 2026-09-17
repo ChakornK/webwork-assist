@@ -9,23 +9,23 @@
     "format": "prettier --write ./src"
   },
   "dependencies": {
-    "solid-js": "^1.9.11"
+    "solid-js": "^1.9.15"
   },
   "devDependencies": {
-    "@rolldown-plugin/solid": "^0.0.3",
-    "@types/node": "^25.5.0",
-    "@unocss/postcss": "^66.6.7",
-    "@violentmonkey/types": "^0.3.2",
-    "concurrently": "^9.2.1",
-    "lightningcss": "^1.32.0",
+    "@rolldown-plugin/solid": "^0.1.0",
+    "@types/node": "26.5.1",
+    "@unocss/postcss": "^66.10.1",
+    "@violentmonkey/types": "^0.3.4",
+    "concurrently": "10.0.5",
+    "lightningcss": "^1.33.0",
     "lite-server": "^2.6.1",
-    "postcss": "^8.5.8",
-    "postcss-import": "^16.1.1",
-    "prettier": "^3.8.1",
-    "rolldown": "^1.0.0-rc.1",
+    "postcss": "^8.5.28",
+    "postcss-import": "17.0.0",
+    "prettier": "^3.9.6",
+    "rolldown": "1.2.8",
     "ts-node": "^10.9.2",
-    "typescript": "^5.9.3",
-    "unocss": "^66.6.7"
+    "typescript": "7.0.2",
+    "unocss": "^66.10.1"
   },
-  "packageManager": "yarn@4.13.0"
+  "packageManager": "yarn@4.18.0+sha512.fcb8716fe7cd0eece141ffc18b92193a9df9204c1ba83189c288835223fc0bbe64af473bab0d5e9927a7daeb5caf2bb07eb2787cc9338ca040ea125f2a1f2f7e"
 }
