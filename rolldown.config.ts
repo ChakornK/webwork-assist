@@ -21,7 +21,7 @@ const gitHash = (() => {
 const userScriptMetadata = `// ==UserScript==
 // @name        WebWork Assist
 // @namespace   Violentmonkey Scripts
-// @match       https://webwork.*/webwork2/*
+// @include     /^https://webwork\.[^/]*?/webwork2/.*?$/
 // @version     ${process.env.VERSION || "1.0.0"}
 // @author      -
 // @description Build ${gitHash} - ${new Date().toLocaleString("en")}
